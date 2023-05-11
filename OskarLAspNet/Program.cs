@@ -34,7 +34,12 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
     x.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<DataContext>();
 
-
+builder.Services.ConfigureApplicationCookie(x =>
+{
+    x.LoginPath = "/login";
+    x.LogoutPath = "/"; ;
+    x.AccessDeniedPath = "/YouShallNotPass";
+});
 
 
 var app = builder.Build();

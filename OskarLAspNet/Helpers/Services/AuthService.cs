@@ -12,12 +12,14 @@ namespace OskarLAspNet.Helpers.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly AddressService _addressService;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AuthService(UserManager<AppUser> userManager, AddressService addressService, SignInManager<AppUser> signInManager)
+        public AuthService(UserManager<AppUser> userManager, AddressService addressService, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _addressService = addressService;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
 
@@ -32,20 +34,35 @@ namespace OskarLAspNet.Helpers.Services
         public async Task<bool> RegisterUserAsync(UserRegisterVM viewModel)
         {
             AppUser appUser = viewModel;
+            var roleName = "user";
+
+            if (!await _roleManager.Roles.AnyAsync())
+            {
+                await _roleManager.CreateAsync(new IdentityRole("admin"));
+                await _roleManager.CreateAsync(new IdentityRole("user"));
+
+            }
+
+            if (!await _userManager.Users.AnyAsync())
+                roleName = "admin";
 
             var result = await _userManager.CreateAsync(appUser, viewModel.Password);
             if (result.Succeeded)
             {
-                //2.16.00 ish föreläsning 7.
+                await _userManager.AddToRoleAsync(appUser, roleName);
+
+
+
                 var addressEntity = await _addressService.GetOrCreateAsync(viewModel);
                 if (addressEntity != null)
                 {
                     await _addressService.AddAddressAsync(appUser, addressEntity);
                     return true;
                 }
-            }
-            return false;
 
+            }
+
+            return false;
         }
 
         //Inlogg

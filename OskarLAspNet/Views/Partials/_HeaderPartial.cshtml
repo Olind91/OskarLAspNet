@@ -13,17 +13,28 @@
      
         <nav class="menu-icons">
             <a class="link" asp-controller="Products" asp-action="Search"><i class="fa-regular fa-search"></i></a>
-            
+
             @if (signInManager.IsSignedIn(User))
             {
-                <a class="link" asp-controller="Account" asp-action="Index">@User.Identity?.Name</a>
-                <a class="link" asp-controller="Logout" asp-action="Index">Logout</a>
+                var user = await userManager.GetUserAsync(User);
+
+                if (await userManager.IsInRoleAsync(user, "admin"))
+                {
+                    <a asp-controller="admin" asp-action="Index" class="link">Admin</a>
+                }
+                else
+                {
+                    //<a asp-controller="account" asp-action="Index" class="link">@User.FindFirst("FirstName")?.Value</a>
+                    <a class="link" asp-controller="Account" asp-action="Index">@User.Identity?.Name</a>
+                }
+
+                <a asp-controller="logout" asp-action="Index" class="link">Logout</a>
             }
             else
             {
-                <a class="link" asp-controller="Login" asp-action="Index">Login</a>
-            }
-                       
+                <a asp-controller="Login" asp-action="Index" class="link">Login</a>
+                //<a asp-controller="Register" asp-action="Index" class="link">Register</a>
+            }                 
 
             <a class="link" asp-controller="Cart" asp-action="Index"><i class="fa-solid fa-cart-shopping"></i></a>
         </nav>
