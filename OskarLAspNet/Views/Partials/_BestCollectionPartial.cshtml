@@ -29,7 +29,8 @@
                     <div class="collection-grid">
 
                         <!-- collection-item start -->
-                        <a href="@link" class="collection-item">
+                        <a href="@Url.Action("ProductDetails", "Products", new { productId = product.ArticleNumber })" class="collection-item">
+
                             <img src="~/images/products/@product.ImageUrl" alt="@product.ProductName" height="50" width="50">
                             <div class="body">
                                 <div class="title">@product.ProductName</div>

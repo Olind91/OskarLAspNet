@@ -28,13 +28,19 @@ namespace OskarLAspNet.Controllers
                     if (viewModel.Image != null)
                         await _productService.UploadImageAsync(product, viewModel.Image);
                     // await _productService.CreateProductAsync(viewModel);
-                    return RedirectToAction("/");
+                    return RedirectToAction("Index");
 
                 }
 
                 ModelState.AddModelError("", "Something Went Wrong.");
             }
             return View();
+        }
+
+        public async Task<IActionResult> ProductDetails(ProductRegVM viewModel)
+        {
+            await _productService.GetProductAsync(viewModel.ArticleNumber);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Index()
