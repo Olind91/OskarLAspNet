@@ -20,22 +20,21 @@ namespace OskarLAspNet.Models.Identity
         {
             var claimsIdentity = await base.GenerateClaimsAsync(user);
 
-
-
             if (await _userManager.IsInRoleAsync(user, "admin"))
             {
                 claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
             }
-
-
+            else
+            {
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "user"));
+            }
 
             claimsIdentity.AddClaim(new Claim("DisplayName", $"{user.FirstName} {user.LastName}"));
             claimsIdentity.AddClaim(new Claim("FirstName", $"{user.FirstName}"));
 
-
-
-
             return claimsIdentity;
         }
+
+
     }
 }

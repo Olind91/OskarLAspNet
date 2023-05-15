@@ -3,9 +3,11 @@
     <h3>THIS ACCOUNT BELONGS TO @User.Identity?.Name</h3>
     
     <div class="menu-links">
-        <a class="link" asp-controller="Products" asp-action="Create">Create new Product</a>
-        <a class="link" asp-controller="ProductCategories" asp-action="Create">Create new Category</a>
-        <a class="link" asp-controller="Tags" asp-action="Create">Create new tag</a>
+        <a class="link btn btn-primary" asp-controller="Products" asp-action="Create">Create new Product</a>
+        <a class="link btn btn-primary" asp-controller="ProductCategories" asp-action="Create">Create new Category</a>
+        <a class="link btn btn-primary" asp-controller="Tags" asp-action="Create">Create new tag</a>
+        <a class="link btn btn-primary" asp-controller="Admin" asp-action="GetAllUsers">Show all registered users</a>
+        <a class="link btn btn-primary" asp-controller="Admin" asp-action="AdminProducts">Show all registered products</a>
     </div>
     
 

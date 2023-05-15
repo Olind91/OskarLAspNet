@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OskarLAspNet.Helpers.Repos;
+using OskarLAspNet.Models.Entities;
 using OskarLAspNet.Models.Identity;
 using OskarLAspNet.Models.ViewModels;
 using System.Linq.Expressions;
@@ -74,8 +76,9 @@ namespace OskarLAspNet.Helpers.Services
                 var result = await _signInManager.PasswordSignInAsync(appUser, viewModel.Password, viewModel.RememberMe, false);
                 return result.Succeeded;
             }
-
             return false;
         }
+
+        
     }
 }
