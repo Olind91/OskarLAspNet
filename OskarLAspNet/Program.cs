@@ -16,6 +16,9 @@ builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configura
 //Services
 builder.Services.AddScoped<AddressService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<ProductCategoryService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<TagService>();
 
 
 
@@ -23,6 +26,11 @@ builder.Services.AddScoped<AuthService>();
 //Repos
 builder.Services.AddScoped<AddressRepository>();
 builder.Services.AddScoped<UserAddressRepository>();
+builder.Services.AddScoped<ProductCategoryRepo>();
+builder.Services.AddScoped<ProductRepo>();
+builder.Services.AddScoped<ProductTagRepo>();
+builder.Services.AddScoped<TagRepo>();
+
 
 
 

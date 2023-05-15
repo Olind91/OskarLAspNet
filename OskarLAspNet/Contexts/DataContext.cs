@@ -11,7 +11,14 @@ namespace OskarLAspNet.Contexts
         {
         }
 
+        //Users
         public DbSet<AddressEntity> Adresses { get; set; }
         public DbSet<UserAddressEntity> UserAddresses { get; set; }
+
+        //Products
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<TagEntity> Tags { get; set; }
+        public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
+        public DbSet<ProductTagEntity> ProductTags { get; set; }
     }
 }
