@@ -14,7 +14,7 @@ namespace OskarLAspNet.Helpers.Services
             _contactFormRepo = contactFormRepo;
         }
 
-
+        #region Save form to DB
         public async Task<ContactFormEntry> AddAsync(ContactFormVM viewModel)
         {
             var entity = new ContactFormEntryEntity
@@ -43,9 +43,16 @@ namespace OskarLAspNet.Helpers.Services
             };
 
             return contactFormEntry;
-
-
-
         }
+        #endregion
+
+        #region Get all comments for admin
+
+        public async Task<IEnumerable<ContactFormEntryEntity>> GetAllAsync()
+        {
+            return await _contactFormRepo.GetAllAsync();
+        }
+
+        #endregion
     }
 }

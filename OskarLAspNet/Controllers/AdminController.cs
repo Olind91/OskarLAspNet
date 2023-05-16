@@ -12,11 +12,13 @@ namespace OskarLAspNet.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly ProductService _productService;
+        private readonly ContactFormService _contactFormService;
 
-        public AdminController(DataContext dataContext, ProductService productService)
+        public AdminController(DataContext dataContext, ProductService productService, ContactFormService contactFormService)
         {
             _dataContext = dataContext;
             _productService = productService;
+            _contactFormService = contactFormService;
         }
 
         [Authorize(Roles = "admin")]
@@ -40,6 +42,15 @@ namespace OskarLAspNet.Controllers
 
             var products = await _productService.GetAllAsync();
             return View(products);
+
+        }
+
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> ShowAllComments()
+        {
+
+            var comments = await _contactFormService.GetAllAsync();
+            return View(comments);
 
         }
 
