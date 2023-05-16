@@ -39,8 +39,18 @@ namespace OskarLAspNet.Controllers
 
         public async Task<IActionResult> ProductDetails(ProductRegVM viewModel)
         {
-            await _productService.GetProductAsync(viewModel.ArticleNumber);
-            return View(viewModel);
+            var product = await _productService.GetProductAsync(viewModel.ArticleNumber);
+
+            if (product != null)
+            {
+                
+                viewModel.ProductName = product.ProductName;
+                viewModel.ProductDescription = product.ProductDescription;
+                
+
+                return View(viewModel);
+            }
+            return View();
         }
 
         public async Task<IActionResult> Index()

@@ -1,4 +1,5 @@
-﻿using OskarLAspNet.Models.Entities;
+﻿using OskarLAspNet.Models.Dtos;
+using OskarLAspNet.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace OskarLAspNet.Models.ViewModels
@@ -13,7 +14,9 @@ namespace OskarLAspNet.Models.ViewModels
         [DataType(DataType.Upload)]
         public IFormFile? Image { get; set; }
 
+               
         public List<string> Tags { get; set; } = new List<string>();
+
         public int CategoryID { get; set; }
 
 
