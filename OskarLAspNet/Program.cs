@@ -19,6 +19,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ProductCategoryService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<TagService>();
+builder.Services.AddScoped<ContactFormService>();
 
 
 
@@ -30,6 +31,7 @@ builder.Services.AddScoped<ProductCategoryRepo>();
 builder.Services.AddScoped<ProductRepo>();
 builder.Services.AddScoped<ProductTagRepo>();
 builder.Services.AddScoped<TagRepo>();
+builder.Services.AddScoped<ContactFormRepo>();
 
 
 
